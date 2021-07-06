@@ -6,6 +6,7 @@ const vueLoaderPlugin = require('vue-loader/lib/plugin');
 const Webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // 拷贝静态资源  直接拷贝文件
 const devMode = process.argv.indexOf('--mode==production')
+const firstPlugin = require('./webpack-firstPlugin')
 module.exports = {
     entry: ["@babel/polyfill",path.resolve(__dirname, '../src/main.js')],
     output: {
@@ -114,6 +115,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new firstPlugin(),
         new Webpack.DllReferencePlugin({
             context:__dirname,
             manifest:require('./vendor-mainfest.json')
