@@ -5,7 +5,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin'); // 拷贝静态资源 
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin'); // 压缩css
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin') // 压缩js
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+if(process.env.npm_config_report){
+    webpackConfig.plugins.push(  new BundleAnalyzerPlugin({
+        analyzerHost:'127.0.0.1',
+        analyzerPort:8889
+    }))
+}
 module.exports = merge(webpackConfig, {
     mode: "production",
     devtool: 'hidden-source-map',
@@ -16,10 +21,6 @@ module.exports = merge(webpackConfig, {
                     from: path.resolve(__dirname, '../public'),
                     to: path.resolve(__dirname, '../dist'),
                 }]
-        }),
-        new BundleAnalyzerPlugin({
-            analyzerHost:'127.0.0.1',
-            analyzerPort:8889
         })
     ],
     // 优化

@@ -101,7 +101,7 @@ module.exports = {
                 use:{
                     loader:'babel-loader',
                     options:{
-                        presets:['@babel/preset-env',{ modules: false }]
+                        presets:['@babel/preset-env']
                     }
                 },
                 exclude:/node_modules/
